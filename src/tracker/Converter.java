@@ -6,11 +6,11 @@ public class Converter {
 
 
    int convertToKm(int steps){
-        int kilometres = ((steps * stepSm)/1_000_000);
+        int kilometres = ((steps * stepSm)/100_000);
         return kilometres;
     }
     int convertStepsToKilocalories(int steps){
-       int kiloCalories = (steps * oneStepCalory)/1_000_000;
+       int kiloCalories = (steps * oneStepCalory)/1_000;
        return kiloCalories;
     }
 }

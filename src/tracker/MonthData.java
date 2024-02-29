@@ -1,50 +1,58 @@
 package tracker;
 
 public class MonthData {
+    public Converter convertStepsToKilocalories;
     int[] days = new int[30];
 
-    void printDaysAndStepsFromMonth(int month) {
-//     !!  для оформления  использовать format как в Python???
-//        как?
+    void printDaysAndStepsFromMonth() {
         for (int i = 0; i < days.length; i++) {
-            System.out.println("Месяц " + month + " День" + (i + 1) + "шагов: " + days[i]);
+            System.out.println(" День" + (i + 1) + "шагов: " + days[i]);
         }
-  }
-
-
-     int sumStepsFromMonth() {
-        int totalMonthSteps = 0;
-        for (int i = 0; i < days.length; i++) {
-            totalMonthSteps += days[i];
-        }
-         return totalMonthSteps ;
     }
-     int maxSteps() {
-         if(days.length == 0){
-             return 0;
-         }
+
+    int sumStepsFromMonth() {
+        int totalMonthSteps = 0;
+        for (int day : days) {
+            totalMonthSteps += day;
+        }
+        return totalMonthSteps;
+    }
+int averageSteps(){
+    int summary = sumStepsFromMonth();
+    int average = summary / days.length;
+    return average;
+
+}
+    int maxSteps() {
         int maxStep = days[0];
-        for (int i = 0; i < days.length; i++) {
-            if (days[i] > days[i - 1]) {
-                maxStep = days[i];
+        for (int day : days) {
+            if (day > maxStep) {
+                maxStep = day;
             }
         }
         return maxStep;
     }
 
-    int bestSeries(int goalByStepsPerDay){
-        int countMax = 0;
-        for (int i = 0; i < days.length; i++) {
-            if (days[i] >=goalByStepsPerDay){
-                countMax++;
+
+    int bestSeries(int goalByStepsPerDay) {
+        int maxDays = 0;
+        int maxSeriesDays = 0;
+        for (int day : days) {
+            if (day >= goalByStepsPerDay) {
+                maxDays++;
+            } else {
+                if (maxDays > maxSeriesDays) {
+                    maxSeriesDays = maxDays;
+                }
+                maxDays = 0;
             }
         }
-        return countMax;
+
+        if (maxDays > maxSeriesDays) {
+            maxSeriesDays = maxDays;
+        }
+
+        return maxSeriesDays;
     }
+
 }
-
-
-
-
-
-
